@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // Roatate: Rotate the player from the mouse movement.
+    // Rotate: Rotate the player from the mouse movement.
     //--------------------------------------------------------------------------------------
     void Rotate()
     {
