@@ -65,10 +65,13 @@ public class Interactable : MonoBehaviour
     // protected bool for if the object has been interacted with or not.
     protected bool m_bInteracted;
 
+    // protected bool for if an object is interactable
+    protected bool m_bInteractable = false;
+
     // protected audio source
     protected AudioSource m_asAudioSource;
     //--------------------------------------------------------------------------------------
-
+    
     //--------------------------------------------------------------------------------------
     // initialization.
     //--------------------------------------------------------------------------------------
@@ -93,15 +96,16 @@ public class Interactable : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // OnTriggerEnter: OnTriggerEnter is called when the Collider cObject enters the trigger.
+    // OnTriggerStay2D: OnTriggerStay2D is called when the Collider cObject enters the trigger
+    // and contiunes to trigger it.
     //
     // Param:
     //      cObject: The other Collider invloved in the collision.
     //--------------------------------------------------------------------------------------
-    private void OnTriggerEnter2D(Collider2D cObject)
+    private void OnTriggerStay2D(Collider2D cObject)
     {
-        // if collides is player
-        if (cObject.tag == "Player" && !m_bInteracted)
+        // if collides is player and not interacted or interactable
+        if (cObject.tag == "Player" && !m_bInteracted && !m_bInteractable)
         {
             // Display debug message showing interaction.
             if (m_sPlayerObject.m_bDebugMode)
@@ -112,6 +116,9 @@ public class Interactable : MonoBehaviour
 
             // activate gameobject for visual indicator
             m_tmBtnVisual.gameObject.SetActive(true);
+
+            // set the object as interactable
+            m_bInteractable = true;
         }
     }
 
@@ -124,7 +131,24 @@ public class Interactable : MonoBehaviour
     private void OnTriggerExit2D(Collider2D cObject)
     {
         // if collide is player
-        if (cObject.tag == "Player" && m_sPlayerObject.InteractionCallback != null)
+        if (cObject.tag == "Player")
+        {
+            // Display debug message showing interaction.
+            if (m_sPlayerObject.m_bDebugMode)
+                Debug.Log("Exited Interactable Trigger");
+
+            // call exit interaction function.
+            ExitInteract();
+        }
+    }
+    
+    //--------------------------------------------------------------------------------------
+    // ExitInteract: Unsubscribes the interaction, resets object for new interaction.
+    //--------------------------------------------------------------------------------------
+    protected void ExitInteract()
+    {
+        // if callback is not null
+        if (m_sPlayerObject.InteractionCallback != null)
         {
             // Display debug message showing interaction.
             if (m_sPlayerObject.m_bDebugMode)
@@ -135,6 +159,9 @@ public class Interactable : MonoBehaviour
 
             // deactivate gameobject for visual indicator
             m_tmBtnVisual.gameObject.SetActive(false);
+
+            // not interactable anymore
+            m_bInteractable = false;
         }
     }
 
@@ -151,12 +178,15 @@ public class Interactable : MonoBehaviour
         // if the interactable is not single use.
         if (!m_bSingleUse)
         {
-            // the object is finished being interacted with
-            m_bInteracted = false;
+            // the object has been interacted with.
+            m_bInteracted = true;
 
             // Play Interaction Audio.
             if (m_bInteractAudio)
                 m_asAudioSource.PlayOneShot(m_acInteractAudio);
+
+            // Exit interaction and make object interactable again
+            ExitInteract();
         }
 
         // if the interactable is single use.

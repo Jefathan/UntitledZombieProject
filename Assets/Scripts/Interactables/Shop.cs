@@ -41,6 +41,13 @@ public class Shop : Interactable
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        // If the interaction button or exc is pressed.
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            // turn off interaction and set canvas to inactive
+            m_bInteracted = false;
+            m_gCanvasObject.SetActive(false);
+        }
     }
 
     //--------------------------------------------------------------------------------------
