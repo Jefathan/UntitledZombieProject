@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61531423699994562}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fWalkSpeed: 1
   m_fRunSpeed: 1.5
+  m_bDebugMode: 1
   m_gWeaponPrefab: {fileID: 1464900318012710, guid: 9ec021c7263fec74e9ab93327c45d5c5,
     type: 2}
 --- !u!212 &212350756137963490
@@ -166,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 8d724d8a66f39704daa6934722eeb562, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4499cccc49b9d3049b6d1cf45295f955, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

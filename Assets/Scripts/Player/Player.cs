@@ -33,6 +33,19 @@ public class Player : MonoBehaviour
     [Space]
     //--------------------------------------------------------------------------------------
 
+    // DEBUG //
+    //--------------------------------------------------------------------------------------
+    // Title for this section of public values.
+    [Header("Debug:")]
+
+    // public bool for turning the debug info off and on.
+    [LabelOverride("Display Debug Info?")] [Tooltip("Turns off and on debug information in the unity console.")]
+    public bool m_bDebugMode = true;
+
+    // Leave a space in the inspector.
+    [Space]
+    //--------------------------------------------------------------------------------------
+
     // PRIVATE VALUES //
     //--------------------------------------------------------------------------------------
     // private rigidbody.
@@ -48,19 +61,22 @@ public class Player : MonoBehaviour
     private float m_fArmDistanceFromMouse;
     //--------------------------------------------------------------------------------------
 
+    // DELEGATES //
+    //--------------------------------------------------------------------------------------
+    // Create a new Delegate for handling the interaction functions.
+    public delegate void InteractionEventHandler();
 
+    // Create an event for the delegate for extra protection. 
+    public InteractionEventHandler InteractionCallback;
+    //--------------------------------------------------------------------------------------
 
-
-    // REMOVE //
+    // REMOVE // TEMP // REMOVE //
     // Weapon prefab.
     public GameObject m_gWeaponPrefab;
 
     // The Pistol weapon.
     private GameObject m_gPistol;
-    // REMOVE //
-
-
-
+    // REMOVE // TEMP // REMOVE //
 
     //--------------------------------------------------------------------------------------
     // initialization
@@ -76,19 +92,11 @@ public class Player : MonoBehaviour
         // set the current speed of the player to walk
         m_fCurrentSpeed = m_fWalkSpeed;
 
-
-
-
-        // REMOVE //
+        // REMOVE // TEMP // REMOVE //
         // Set the parenting of pistol prefab.
         m_gPistol = Instantiate(m_gWeaponPrefab);
         m_gPistol.transform.parent = m_gArm.transform;
-        // REMOVE //
-
-
-
-
-
+        // REMOVE // TEMP // REMOVE //
     }
 
     //--------------------------------------------------------------------------------------
@@ -96,6 +104,9 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void FixedUpdate()
     {
+        // Run the interaction function
+        Interaction();
+
         // rotate player based on mouse postion.
         Rotate();
 
@@ -180,6 +191,19 @@ public class Player : MonoBehaviour
 
             // Update the rotation of the arm.
             m_gArm.transform.rotation = Quaternion.AngleAxis(fAngle, Vector3.forward);
+        }
+    }
+
+    //--------------------------------------------------------------------------------------
+    // Interaction: Function interacts on button press with interactables objects.
+    //--------------------------------------------------------------------------------------
+    public void Interaction()
+    {
+        // If the interaction button is pressed.
+        if (Input.GetKeyUp(KeyCode.E) && InteractionCallback != null)
+        {
+            // Run interaction delegate.
+            InteractionCallback();
         }
     }
 }
