@@ -1,5 +1,5 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: Sets the cursor of the scene.
+// Purpose: 
 //
 // Description: 
 //
@@ -12,23 +12,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// CustomCursor object. Inheriting from MonoBehaviour.
+// PistolBullet object. Inheriting from Bullet.
 //--------------------------------------------------------------------------------------
-public class CustomCursor : MonoBehaviour
+public class PistolBullet : Bullet
 {
-    // Public texture for the cursor visuals.
-    [LabelOverride("Cursor")] [Tooltip("The cursor object to replace the default unity cursor.")]
-    public Texture2D m_tCursor;
-
     //--------------------------------------------------------------------------------------
     // initialization
     //--------------------------------------------------------------------------------------
-    void Awake()
+    new void Awake()
     {
-        // Set the mouse click point.
-        Vector2 v2CursorHotspot = new Vector2(m_tCursor.width / 2, m_tCursor.height / 2);
+        // Run the base awake
+        base.Awake();
+    }
 
-        // Set the cursor values.
-        Cursor.SetCursor(m_tCursor, v2CursorHotspot, CursorMode.Auto);
+    //--------------------------------------------------------------------------------------
+    // Update: Function that calls each frame to update game objects.
+    //--------------------------------------------------------------------------------------
+    new void FixedUpdate()
+    {
+        // Run the base update
+        base.FixedUpdate();
     }
 }

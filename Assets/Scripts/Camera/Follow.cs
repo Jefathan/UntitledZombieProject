@@ -1,5 +1,5 @@
 ﻿//--------------------------------------------------------------------------------------
-// Purpose: 
+// Purpose: Sets an object for the camera to follow.
 //
 // Description: 
 //
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// Follow object. Inheriting from MonoBehaviour. Sets an object for the camera to follow.
+// Follow object. Inheriting from MonoBehaviour.
 //--------------------------------------------------------------------------------------
 public class Follow : MonoBehaviour
 {

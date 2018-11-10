@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //--------------------------------------------------------------------------------------
-// Player object. Inheriting from MonoBehaviour. The main player class.
+// Player object. Inheriting from MonoBehaviour.
 //--------------------------------------------------------------------------------------
 public class Player : MonoBehaviour
 {
@@ -48,6 +48,20 @@ public class Player : MonoBehaviour
     private float m_fArmDistanceFromMouse;
     //--------------------------------------------------------------------------------------
 
+
+
+
+    // REMOVE //
+    // Weapon prefab.
+    public GameObject m_gWeaponPrefab;
+
+    // The Pistol weapon.
+    private GameObject m_gPistol;
+    // REMOVE //
+
+
+
+
     //--------------------------------------------------------------------------------------
     // initialization
     //--------------------------------------------------------------------------------------
@@ -61,6 +75,20 @@ public class Player : MonoBehaviour
 
         // set the current speed of the player to walk
         m_fCurrentSpeed = m_fWalkSpeed;
+
+
+
+
+        // REMOVE //
+        // Set the parenting of pistol prefab.
+        m_gPistol = Instantiate(m_gWeaponPrefab);
+        m_gPistol.transform.parent = m_gArm.transform;
+        // REMOVE //
+
+
+
+
+
     }
 
     //--------------------------------------------------------------------------------------
